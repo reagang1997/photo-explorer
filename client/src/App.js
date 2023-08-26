@@ -18,7 +18,7 @@ function App() {
 
   async function getFolder(){
     const response = await axios.get(
-      `http://localhost:8080/api/directory?folderName=${currentPath}`
+      `/api/directory?folderName=${currentPath}`
     );
     dispatch({
       type: SET_FOLDERS,
