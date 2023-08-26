@@ -51,7 +51,7 @@ export default function Navbar() {
 
   const handleSave = async () => {
     setIsEditing(false);
-    const response = await axios.put("/api/renameFolder", {
+    const response = await axios.put("http://localhost:8080/api/renameFolder", {
       oldPath: currentPath,
       newName: editedText,
     });
@@ -99,7 +99,7 @@ export default function Navbar() {
     formData.append("photo", file);
     console.log(formData);
     try {
-      const response = await axios.post("/api/upload", formData, {
+      const response = await axios.post("http://localhost:8080/api/upload", formData, {
         params: {
           uploadPath: currentPath,
         },
