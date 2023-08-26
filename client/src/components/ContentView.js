@@ -15,7 +15,7 @@ export default function ContentView() {
   const dispatch = useDispatch();
   async function getCurrentDirectory() {
     const response = await axios.get(
-      `/api/directory?folderName=${currentPath}`
+      `http://localhost:8080/api/directory?folderName=${currentPath}`
     );
     dispatch({
       type: SET_FOLDERS,
