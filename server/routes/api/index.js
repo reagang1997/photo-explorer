@@ -112,7 +112,7 @@ router.put("/renameFolder", async (req, res) => {
 
     const newPath = jsPath.join(HOME_DIR, jsPath.dirname(oldPath), newName);
 
-    fs.rename(`/Users/reagangrunwald/Personal/pve-stuff/photo-explorer/server/${oldPath}`, newPath, (error) => {
+    fs.rename(HOME_DIR,`${oldPath}`, newPath, (error) => {
       if (error) {
         console.error(error);
         return res
