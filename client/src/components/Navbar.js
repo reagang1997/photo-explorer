@@ -74,7 +74,7 @@ export default function Navbar() {
   }
   const createFolder = async () => {
     const untitledCount = countUntitled();
-    const response = await axios.post(`http://192.168.1.130/api/createFolder`, {
+    const response = await axios.post(`http://192.168.1.130:8080/api/createFolder`, {
       path: `${currentPath}/Untitled${untitledCount}`,
     });
     const newFolder = {
