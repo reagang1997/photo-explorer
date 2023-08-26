@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const jsPath = require("path");
 const fs = require("fs");
-const multer = require('multer');
-const os = require('os')
+const multer = require("multer");
+const os = require("os");
 
-const HOME_DIR = os.homedir()
+const HOME_DIR = os.homedir();
 
 function readFolderContents(folderPath) {
   const files = fs.readdirSync(folderPath);
@@ -74,20 +74,16 @@ router.post("/createFolder", (req, res) => {
         .json({ error: "Path is required in the request body." });
     }
 
-    fs.mkdir(
-      jsPath.join(HOME_DIR,`${path}`),
-      { recursive: true },
-      (error) => {
-        if (error) {
-          console.error(error);
-          return res
-            .status(500)
-            .json({ error: "An error occurred while creating the directory." });
-        }
-
-        res.status(201).json({ message: `Directory created at ${path}` });
+    fs.mkdir(jsPath.join(HOME_DIR, `${path}`), { recursive: true }, (error) => {
+      if (error) {
+        console.error(error);
+        return res
+          .status(500)
+          .json({ error: "An error occurred while creating the directory." });
       }
-    );
+
+      res.status(201).json({ message: `Directory created at ${path}` });
+    });
   } catch (error) {
     console.error(error);
     res
@@ -112,7 +108,10 @@ router.put("/renameFolder", async (req, res) => {
 
     const newPath = jsPath.join(HOME_DIR, jsPath.dirname(oldPath), newName);
 
-    fs.rename(HOME_DIR,`${oldPath}`, newPath, function(error) {
+    const oldFolderPath = path.join(HOME_DIR, oldPath);
+    const newFolderPath = path.join(HOME_DIR, newPath);
+
+    fs.rename(oldFolderPath, newFolderPath, function (error) {
       if (error) {
         console.error(error);
         return res
@@ -135,7 +134,7 @@ const storage = multer.diskStorage({
     // Get the dynamic upload path from the request query or body
     const dynamicUploadPath = req.query.uploadPath || req.body.uploadPath;
     if (!dynamicUploadPath) {
-      return cb(new Error('Missing dynamic upload path.'));
+      return cb(new Error("Missing dynamic upload path."));
     }
 
     const uploadPath = jsPath.join(HOME_DIR, dynamicUploadPath);
@@ -143,18 +142,18 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
-  }
+  },
 });
 
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('photo'), (req, res) => {
-  console.log(req.file)
-  console.log(req.body)
+router.post("/upload", upload.single("photo"), (req, res) => {
+  console.log(req.file);
+  console.log(req.body);
   if (!req.file) {
-    return res.status(400).send('No file uploaded.');
+    return res.status(400).send("No file uploaded.");
   }
-  res.status(200).send('File uploaded successfully.');
+  res.status(200).send("File uploaded successfully.");
 });
 
 module.exports = router;
