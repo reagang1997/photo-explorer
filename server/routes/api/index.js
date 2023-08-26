@@ -135,7 +135,7 @@ const storage = multer.diskStorage({
       return cb(new Error('Missing dynamic upload path.'));
     }
 
-    const uploadPath = jsPath.join(__dirname, '../../', dynamicUploadPath);
+    const uploadPath = jsPath.join("~", 'photos', dynamicUploadPath);
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
