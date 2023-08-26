@@ -34,7 +34,7 @@ function readFolderContents(folderPath) {
 router.get("/directory", (req, res) => {
   const folderName = req.query.folderName;
   console.log(folderName);
-  const folderPath = jsPath.join(__dirname, "../../", `/${folderName}`);
+  const folderPath = jsPath.join("~", "photos", `/${folderName}`);
   console.log(folderPath);
   try {
     const result = readFolderContents(folderPath);
@@ -72,7 +72,7 @@ router.post("/createFolder", (req, res) => {
     }
 
     fs.mkdir(
-      jsPath.join(__dirname, `../../${path}`),
+      jsPath.join("~", "photos",`${path}`),
       { recursive: true },
       (error) => {
         if (error) {
@@ -107,7 +107,7 @@ router.put("/renameFolder", async (req, res) => {
     oldPath = oldPath.startsWith("/") ? oldPath.slice(1) : oldPath;
     newName = newName.startsWith("/") ? newName.slice(1) : newName;
 
-    const newPath = jsPath.join(__dirname, "../../", jsPath.dirname(oldPath), newName);
+    const newPath = jsPath.join("~", "photos", jsPath.dirname(oldPath), newName);
 
     fs.rename(`/Users/reagangrunwald/Personal/pve-stuff/photo-explorer/server/${oldPath}`, newPath, (error) => {
       if (error) {
