@@ -2,7 +2,7 @@ import { SET_CURRENT_PATH, SET_FOLDERS, SET_IMAGES } from "./actions";
 
 // reducers/someReducer.js
 const initialState = {
-  currentPath: "~",
+  currentPath: "/photos",
   folders: [],
   images: [],
 };
