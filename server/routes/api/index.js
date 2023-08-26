@@ -34,7 +34,7 @@ function readFolderContents(folderPath) {
 router.get("/directory", (req, res) => {
   const folderName = req.query.folderName;
   console.log(folderName);
-  const folderPath = jsPath.join("~", "photos", `/${folderName}`);
+  const folderPath = jsPath.join("~", `/${folderName}`);
   console.log(folderPath);
   try {
     const result = readFolderContents(folderPath);
@@ -72,7 +72,7 @@ router.post("/createFolder", (req, res) => {
     }
 
     fs.mkdir(
-      jsPath.join("~", "photos",`${path}`),
+      jsPath.join("~",`${path}`),
       { recursive: true },
       (error) => {
         if (error) {
@@ -107,7 +107,7 @@ router.put("/renameFolder", async (req, res) => {
     oldPath = oldPath.startsWith("/") ? oldPath.slice(1) : oldPath;
     newName = newName.startsWith("/") ? newName.slice(1) : newName;
 
-    const newPath = jsPath.join("~", "photos", jsPath.dirname(oldPath), newName);
+    const newPath = jsPath.join("~", jsPath.dirname(oldPath), newName);
 
     fs.rename(`/Users/reagangrunwald/Personal/pve-stuff/photo-explorer/server/${oldPath}`, newPath, (error) => {
       if (error) {
@@ -135,7 +135,7 @@ const storage = multer.diskStorage({
       return cb(new Error('Missing dynamic upload path.'));
     }
 
-    const uploadPath = jsPath.join("~", 'photos', dynamicUploadPath);
+    const uploadPath = jsPath.join("~", dynamicUploadPath);
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
