@@ -112,7 +112,7 @@ router.put("/renameFolder", async (req, res) => {
 
     const newPath = jsPath.join(HOME_DIR, jsPath.dirname(oldPath), newName);
 
-    fs.rename(HOME_DIR,`${oldPath}`, newPath, (error) => {
+    fs.rename(HOME_DIR,`${oldPath}`, newPath, function(error) {
       if (error) {
         console.error(error);
         return res
