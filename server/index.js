@@ -3,12 +3,15 @@ const path = require('path');
 const routes = require('./routes');
 const cors = require('cors')
 const app = express();
+const os = require('os')
+
+const HOME_DIR = os.homedir()
 
 const port = process.env.PORT || 8080;
 app.use(cors({
   origin: 'http://192.168.1.130' 
 })); 
-app.use("/photos", express.static(path.join("~", 'photos')))
+app.use("/photos", express.static(path.join(HOME_DIR, 'photos')))
 app.use(express.json()); // This line is important for parsing JSON in the request body
 app.use(routes)
 
