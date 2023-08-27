@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentPath } from "../utils/selectors";
 import { Box, Image as ChakraImage, Text } from "@chakra-ui/react";
 
-const PHOTO_URL = "http://localhost:8080"
+const PHOTO_URL = "http://192.168.1.130:8080"
 
 export default function Image({ image }) {
   const currentPath = useSelector(selectCurrentPath);
