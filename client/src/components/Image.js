@@ -2,6 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentPath } from "../utils/selectors";
 import { Box, Image as ChakraImage, Text } from "@chakra-ui/react";
+
+const PHOTO_URL = "http://localhost:8080"
+
 export default function Image({ image }) {
   const currentPath = useSelector(selectCurrentPath);
 
@@ -19,7 +22,7 @@ export default function Image({ image }) {
         padding={'4px'}
         borderRadius={'4px'}
         cursor={'pointer'}
-        src={`${currentPath}/${image}`}
+        src={`${PHOTO_URL}${currentPath}/${image}`}
       />
       <Text align={'center'} color={'whiteAlpha.900'}>Image Name</Text>
     </Box>
